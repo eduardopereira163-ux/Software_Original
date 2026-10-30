@@ -1,0 +1,19 @@
+CONECTORNO - SEGURANÇA DE SENHA E RECUPERAÇÃO
+
+CÓDIGO MESTRE FIXO
+- A recuperação usa o código mestre fixo entregue ao responsável pelo projeto nesta conversa.
+- O código não muda quando a senha do professor é redefinida.
+- O servidor guarda somente o SHA-256 do código mestre no app.py; o código original não fica gravado em texto no arquivo.
+- Em “Esqueci a senha”, informe o usuário, o código mestre e a nova senha.
+- Quem conhecer o código mestre e o usuário poderá redefinir a senha. Mantenha-o privado e não o coloque em repositório público.
+- Se suspeitar que o código foi divulgado, será necessário trocar o hash configurado no app.py por outro código novo.
+
+PROTEÇÃO DA SENHA E DA RECUPERAÇÃO
+- A senha do professor é armazenada como hash com o mecanismo seguro do Werkzeug, nunca em texto puro.
+- A recuperação limita tentativas por endereço IP: 5 tentativas em 15 minutos (limite mantido em memória enquanto o servidor está ligado).
+- A chave de sessão fica em .secret_key_teste. Não apague nem compartilhe esse arquivo.
+- Use senha exclusiva e longa; prefira pelo menos 12 caracteres e não reutilize senhas de outros serviços.
+- Mantenha Windows e Python atualizados, use uma conta do Windows protegida e faça backup protegido da pasta.
+- Para usar em rede, deixe o Firewall do Windows ativo e permita apenas a rede privada confiável. Não exponha a porta 5000 à internet.
+- Este servidor Flask de teste não deve ser publicado diretamente na internet. Para uso real, use HTTPS e servidor WSGI de produção, com configuração de cookies Secure e proteção de rede adequada.
+- O código mestre não substitui backup. Guarde cópias protegidas de auth_teste.json, .secret_key_teste, dados_teste.json e uploads/.

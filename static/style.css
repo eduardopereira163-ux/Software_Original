@@ -1,0 +1,2546 @@
+/* CORES: variáveis reutilizadas para manter o padrão visual do SENAI. */
+:root {
+  --blue:#20468f;
+  --blue-dark:#183d82;
+  --orange:#f04410;
+  --border:#d3d3d3;
+  --gray:#e3e3e3;
+  --text:#111;
+  --muted:#707070;
+  --green:#009b25;
+  --red:#e00000
+}
+
+
+/* BASE: remove diferenças de cálculo de tamanho e padroniza controles. */
+* {
+  box-sizing:border-box
+}
+
+html,body {
+  margin:0;
+  min-height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:#fff;
+  font-size:14px
+}
+
+button,input,textarea,select {
+  font:inherit
+}
+
+button {
+  cursor:pointer
+}
+
+[hidden] {
+  display:none!important
+}
+
+/* ESTRUTURA GERAL: cabeçalho, conteúdo e rodapé ocupam a tela inteira. */
+.view {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background:white
+}
+
+.senai-header {
+  height:70px;
+  flex:0 0 70px;
+  display:flex;
+  align-items:center;
+  background:var(--blue);
+  color:#fff;
+  padding:0 18px
+}
+
+.senai-header.centered {
+  justify-content:center
+}
+
+.senai-logo {
+  font-size:31px;
+  line-height:1;
+  font-weight:900;
+  font-style:italic;
+  letter-spacing:-1.8px;
+  color:#fff
+}
+
+.nav-header {
+  gap:38px
+}
+
+.navigation {
+  display:flex;
+  align-items:center;
+  gap:18px;
+  height:100%
+}
+
+.nav-link {
+  background:none;
+  border:0;
+  padding:0;
+  color:#8099c6;
+  font-size:14px
+}
+
+.nav-link:hover,.nav-link.active {
+  color:#fff
+}
+
+.header-user {
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#fff;
+  font-size:12px
+}
+
+.logout-button {
+  border:1px solid rgba(255,255,255,.55);
+  color:#fff;
+  background:transparent;
+  border-radius:3px;
+  padding:5px 9px;
+  font-size:11px
+}
+
+/* RODAPÉ: faixa laranja com o texto de identificação do projeto. */
+.senai-footer {
+  min-height:60px;
+  flex:0 0 60px;
+  background:var(--orange);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:14px;
+  text-align:center;
+  font-size:12px;
+  font-weight:700
+}
+
+/* LOGIN: centraliza o formulário no espaço disponível. */
+.login-area {
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:35px 16px
+}
+
+.login-form {
+  width:min(100%,190px);
+  display:flex;
+  flex-direction:column
+}
+
+.login-form h1 {
+  text-align:center;
+  font-size:14px;
+  font-weight:400;
+  margin:0 0 24px
+}
+
+.login-form label,.note-form label,.professor-note-panel label,.monitor-response label {
+  font-size:10px;
+  font-weight:700;
+  text-align:center;
+  margin:0 0 4px
+}
+
+.login-form input {
+  width:100%;
+  height:37px;
+  margin-bottom:13px;
+  border:1px solid #bdbdbd;
+  border-radius:4px;
+  padding:8px
+}
+
+.btn {
+  border:0;
+  background:var(--blue);
+  color:white;
+  min-height:29px;
+  padding:7px 18px;
+  border-radius:4px;
+  font-size:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center
+}
+
+.btn:hover {
+  background:var(--blue-dark)
+}
+
+.login-form .btn {
+  margin-top:20px;
+  width:130px;
+  align-self:center
+}
+
+.login-hint {
+  font-size:10px;
+  color:#777;
+  text-align:center;
+  line-height:1.45;
+  margin-top:15px
+}
+
+/* PAINEL: largura máxima e espaços ao redor do conteúdo do professor. */
+.app-content {
+  flex:1;
+  padding:24px 4%;
+  width:100%;
+  max-width:1400px;
+  margin:0 auto
+}
+
+.page {
+  min-height:calc(100vh - 154px)
+}
+
+/* ENVIO: área em que o professor escolhe PDF/imagem e o destino de publicação. */
+.upload-panel {
+  margin:0 auto;
+  width:min(100%,600px);
+  border:1px solid #929292;
+  border-radius:8px;
+  padding:48px 68px 28px;
+  min-height:300px
+}
+
+.upload-zone {
+  height:130px;
+  border:1px solid #999;
+  border-radius:5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  cursor:pointer;
+  text-align:center;
+  padding:15px
+}
+
+.upload-icon {
+  font-size:28px;
+  line-height:1
+}
+
+.upload-zone strong {
+  font-size:10px
+}
+
+.selected-file {
+  font-size:10px;
+  color:#555;
+  max-width:100%;
+  overflow-wrap:anywhere
+}
+
+.visually-hidden {
+  position:absolute;
+  left:-10000px;
+  width:1px;
+  height:1px
+}
+
+.upload-actions {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:18px
+}
+
+.status-text {
+  font-size:10px;
+  color:var(--muted)
+}
+
+.published-project {
+  margin-top:20px;
+  border-top:1px solid #ddd;
+  padding-top:16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap
+}
+
+.pdf-badge {
+  background:#f3e7e4;
+  color:#a02a12;
+  font-size:10px;
+  font-weight:bold;
+  padding:9px 7px;
+  border-radius:3px
+}
+
+.project-info {
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  gap:4px;
+  min-width:100px
+}
+
+.project-info strong {
+  font-size:11px;
+  overflow-wrap:anywhere
+}
+
+.project-info small {
+  font-size:10px;
+  color:#777
+}
+
+.secondary-btn,.text-button {
+  background:#fff;
+  border:1px solid #bbb;
+  border-radius:4px;
+  color:#222;
+  padding:7px 11px;
+  font-size:10px
+}
+
+.text-button {
+  color:#b52b1c
+}
+
+/* TÍTULOS: cabeçalhos usados nas páginas de Monitores e seções. */
+.section-heading {
+  text-align:center;
+  margin-bottom:28px
+}
+
+.section-heading h1 {
+  font-size:18px;
+  margin:8px 0
+}
+
+.section-heading p {
+  font-size:12px;
+  color:#666;
+  margin:0
+}
+
+/* MONITORES: grade que mostra os seis cartões, estado e ações. */
+.monitor-grid {
+  max-width:930px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:38px 24px
+}
+
+.monitor-card {
+  border:1px solid #e1e1e1;
+  border-radius:4px;
+  padding:9px;
+  background:#fff;
+  min-width:0
+}
+
+.monitor-thumb {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:125px;
+  background:var(--gray);
+  color:#cfcfcf;
+  overflow:hidden;
+  cursor:pointer
+}
+
+.monitor-thumb .thumb-file {
+  font-size:40px;
+  font-weight:400
+}
+
+.monitor-line {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:9px 0 6px
+}
+
+.monitor-line strong {
+  font-size:12px
+}
+
+.status-dot {
+  display:inline-block;
+  flex:0 0 13px;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:var(--red)
+}
+
+.status-dot.online {
+  background:var(--green)
+}
+
+.status-caption {
+  font-size:9px;
+  color:#888
+}
+
+.monitor-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:8px
+}
+
+.monitor-actions button,.monitor-actions a {
+  font-size:9px;
+  border:0;
+  background:transparent;
+  padding:0;
+  text-decoration:none;
+  color:#777;
+  cursor:pointer
+}
+
+.monitor-actions button:hover,.monitor-actions a:hover {
+  text-decoration:underline;
+  color:var(--blue)
+}
+
+/* OBSERVAÇÕES: painel compacto para as anotações de cada torno. */
+.simple-panel {
+  width:min(100%,460px);
+  margin:0 auto
+}
+
+.observation-panel {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch
+}
+
+.detail-preview {
+  height:220px;
+  border:1px solid #ddd;
+  padding:8px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:10px;
+  overflow:hidden
+}
+
+.detail-preview iframe {
+  width:100%;
+  height:100%;
+  border:0
+}
+
+.empty-preview {
+  height:100%;
+  min-height:110px;
+  width:100%;
+  background:#e4e4e4;
+  color:#888;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-align:center;
+  padding:15px
+}
+
+.empty-preview span {
+  font-size:24px;
+  font-weight:bold
+}
+
+.empty-preview p {
+  font-size:11px;
+  margin:0
+}
+
+.observation-panel h1 {
+  text-align:center;
+  font-size:12px;
+  margin:0 0 22px
+}
+
+.note-form {
+  display:flex;
+  flex-direction:column;
+  gap:9px
+}
+
+.note-form label {
+  text-align:center
+}
+
+.note-form textarea,.professor-note-panel textarea,.monitor-response textarea {
+  width:100%;
+  border:1px solid #bdbdbd;
+  border-radius:4px;
+  padding:9px;
+  resize:vertical;
+  min-height:42px;
+  background:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px
+}
+
+.note-actions {
+  display:flex;
+  justify-content:center;
+  gap:10px
+}
+
+.history-block {
+  border-top:1px solid #e2e2e2;
+  margin-top:22px;
+  padding-top:15px
+}
+
+.history-block h2 {
+  font-size:12px;
+  margin:0 0 9px
+}
+
+.history-list {
+  display:flex;
+  flex-direction:column;
+  gap:8px
+}
+
+.history-item {
+  border:1px solid #e1e1e1;
+  border-radius:4px;
+  padding:8px;
+  font-size:11px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere
+}
+
+.history-item time {
+  display:block;
+  color:#777;
+  font-size:9px;
+  margin-bottom:4px
+}
+
+/* PROJETO: visualizador do desenho e painel de observação do professor. */
+.project-layout {
+  display:grid;
+  grid-template-columns:minmax(0,3fr) minmax(180px,1fr);
+  gap:14px;
+  min-height:500px
+}
+
+.pdf-viewer-wrap {
+  height:min(75vh,760px);
+  min-height:450px;
+  border:1px solid #ddd;
+  background:#e4e4e4
+}
+
+.pdf-viewer-wrap iframe {
+  width:100%;
+  height:100%;
+  border:0;
+  background:#fff
+}
+
+.professor-note-panel {
+  display:flex;
+  flex-direction:column;
+  gap:8px
+}
+
+.professor-note-panel label {
+  text-align:left;
+  font-size:11px
+}
+
+.professor-note-panel select {
+  border:1px solid #bbb;
+  padding:7px;
+  background:#fff;
+  border-radius:3px;
+  font-size:12px
+}
+
+.professor-note-panel textarea {
+  flex:1;
+  min-height:260px;
+  border-radius:0
+}
+
+.professor-note-panel .btn,.professor-note-panel .secondary-btn {
+  width:100%
+}
+
+/* CABEÇALHO DO MONITOR: nome do torno e estado de comunicação. */
+.monitor-header {
+  gap:25px
+}
+
+.monitor-title {
+  font-weight:bold;
+  font-size:15px
+}
+
+.connection-label {
+  margin-left:auto;
+  font-size:11px;
+  color:#d9e6ff
+}
+
+/* TELA DO RASPBERRY: área principal do desenho técnico. */
+.monitor-content {
+  width:min(1400px,100%);
+  margin:0 auto;
+  padding:20px 4%;
+  flex:1
+}
+
+.monitor-pdf-viewer {
+  height:calc(100vh - 370px);
+  min-height:300px;
+  max-height:780px;
+  border:1px solid #ddd;
+  background:#eee;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.monitor-pdf-viewer iframe {
+  width:100%;
+  height:100%;
+  border:0;
+  background:#fff
+}
+
+.monitor-response {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  margin:18px 0
+}
+
+.teacher-feedback {
+  border:1px solid #e0e0e0;
+  padding:12px;
+  border-radius:3px
+}
+
+.teacher-feedback h2 {
+  font-size:12px;
+  margin:0 0 7px
+}
+
+.teacher-feedback p,.history-block p {
+  font-size:11px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  color:#444;
+  margin:0
+}
+
+.monitor-response form {
+  display:flex;
+  flex-direction:column;
+  gap:8px
+}
+
+.monitor-response label {
+  text-align:left
+}
+
+.monitor-response .btn {
+  align-self:flex-start;
+  min-width:110px
+}
+
+/* AVISOS: pequenas mensagens de sucesso e erros de validação. */
+.toast {
+  position:fixed;
+  z-index:100;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:calc(100% - 30px);
+  padding:11px 16px;
+  background:#174a2d;
+  color:#fff;
+  border-radius:4px;
+  font-size:12px;
+  box-shadow:0 5px 18px #0002;
+  display:none
+}
+
+.toast.error {
+  background:#a9271c
+}
+
+.toast.show {
+  display:block
+}
+
+
+/* RESPONSIVO: reorganiza os componentes para tablets e telas menores. */
+@media(max-width:700px) {
+  .senai-header {
+    height:60px;
+    flex-basis:60px;
+    padding:0 12px
+  }
+
+.senai-logo {
+    font-size:25px
+  }
+
+.nav-header {
+    gap:20px
+  }
+
+.navigation {
+    gap:12px
+  }
+
+.nav-link {
+    font-size:12px
+  }
+
+.header-user {
+    gap:6px;
+    font-size:10px
+  }
+
+.monitor-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px 12px
+  }
+
+.monitor-thumb {
+    height:95px
+  }
+
+.upload-panel {
+    padding:26px 18px 22px;
+    min-height:250px
+  }
+
+.project-layout {
+    grid-template-columns:1fr
+  }
+
+.pdf-viewer-wrap {
+    height:55vh;
+    min-height:320px
+  }
+
+.professor-note-panel textarea {
+    min-height:130px
+  }
+
+.monitor-response {
+    grid-template-columns:1fr
+  }
+
+.monitor-pdf-viewer {
+    height:55vh;
+    min-height:280px
+  }
+
+.senai-footer {
+    font-size:10px;
+    min-height:54px;
+    flex-basis:54px
+  }
+
+.app-content {
+    padding:20px 14px
+  }
+
+.page {
+    min-height:calc(100vh - 114px)
+  }
+
+
+}
+
+
+/* TELAS ESTREITAS: evita que cartões e nomes fiquem espremidos. */
+@media(max-width:380px) {
+  .monitor-grid {
+    grid-template-columns:1fr
+  }
+
+.header-user #userDisplay {
+    max-width:58px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+  }
+
+
+}
+
+
+
+/* EXEMPLO: desenho usado quando ainda não foi publicado um projeto real. */
+.fallback-drawing {
+  display:block;
+  width:100%;
+  height:100%;
+  max-height:100%;
+  object-fit:contain;
+  background:#eee
+}
+
+
+
+/* Na tela do projeto, o PDF de referência mostra somente a marca SENAI e a área técnica. */
+/* PRÉVIA DO PROFESSOR: simplifica o cabeçalho enquanto o desenho está aberto. */
+body.teacher-project-active #teacherApp .navigation,body.teacher-project-active #teacherApp .header-user,body.teacher-project-active #teacherApp>.senai-footer {
+  display:none
+}
+
+
+body.teacher-project-active #teacherApp .nav-header {
+  gap:0
+}
+
+
+
+/* Exibição de projetos em imagem, além de PDF. */
+/* IMAGENS: encaixa desenhos enviados como imagem sem deformá-los. */
+.published-project-image  {
+  
+  display: block;
+  
+  width: 100%;
+  
+  height: 100%;
+  
+  max-height: 78vh;
+  
+  object-fit: contain;
+  
+  background: #fff;
+  
+}
+
+
+
+/* Ajustes finais de fidelidade ao modelo do PDF do SENAI e melhor legibilidade. */
+:root  {
+  
+  --blue: #20468f;
+  
+  --blue-dark: #183d82;
+  
+  --orange: #f04410;
+  
+  --green: #009b25;
+  
+  --red: #e00000;
+  
+}
+
+
+html, body  {
+   font-size: 16px;
+  
+}
+
+
+.senai-logo  {
+   font-size: 42px;
+   letter-spacing: -2px;
+  
+}
+
+
+.senai-header  {
+   height: 102px;
+   flex-basis: 102px;
+   padding: 0 18px;
+  
+}
+
+
+.nav-header  {
+   gap: 40px;
+  
+}
+
+
+.navigation  {
+   gap: 20px;
+  
+}
+
+
+.nav-link  {
+   font-size: 20px;
+  
+}
+
+
+.header-user  {
+   font-size: 14px;
+  
+}
+
+
+.logout-button  {
+   font-size: 14px;
+   padding: 7px 12px;
+  
+}
+
+
+.senai-footer  {
+   min-height: 94px;
+   flex-basis: 94px;
+   font-size: 16px;
+   padding: 18px;
+  
+}
+
+
+.login-view .senai-header  {
+   height: 16vh;
+   flex-basis: 16vh;
+   min-height: 96px;
+  
+}
+
+
+.login-view .senai-logo  {
+   font-size: 48px;
+  
+}
+
+
+.login-view .senai-footer  {
+   height: 14.7vh;
+   flex-basis: 14.7vh;
+   min-height: 82px;
+  
+}
+
+
+.login-form  {
+   width: min(100%, 280px);
+  
+}
+
+
+.login-form h1  {
+   font-size: 23px;
+   margin-bottom: 30px;
+  
+}
+
+
+.login-form label  {
+   font-size: 16px;
+   margin-bottom: 6px;
+  
+}
+
+
+.login-form input  {
+   height: 55px;
+   font-size: 17px;
+   margin-bottom: 22px;
+   padding: 10px 12px;
+  
+}
+
+
+.btn  {
+   min-height: 40px;
+   padding: 9px 18px;
+   font-size: 14px;
+  
+}
+
+
+.login-form .btn  {
+   margin-top: 34px;
+   width: 232px;
+   min-height: 32px;
+  
+}
+
+
+.login-area  {
+   padding: 24px 16px;
+  
+}
+
+
+.app-content  {
+   padding: 28px 4%;
+  
+}
+
+
+.page  {
+   min-height: calc(100vh - 196px);
+  
+}
+
+
+.upload-panel  {
+   width: min(100%, 780px);
+   min-height: 450px;
+   padding: 94px 12% 42px;
+   border-radius: 12px;
+  
+}
+
+
+.upload-zone  {
+   height: 244px;
+   gap: 18px;
+   padding: 18px;
+  
+}
+
+
+.upload-icon  {
+   font-size: 36px;
+  
+}
+
+
+.upload-zone strong  {
+   font-size: 16px;
+  
+}
+
+
+.selected-file, .status-text  {
+   font-size: 13px;
+  
+}
+
+
+.upload-actions  {
+   justify-content: center;
+   margin-top: 34px;
+  
+}
+
+
+.upload-actions .status-text  {
+   margin-right: auto;
+  
+}
+
+
+.upload-actions .btn  {
+   width: min(232px, 48%);
+   min-height: 32px;
+  
+}
+
+
+.published-project  {
+   gap: 12px;
+  
+}
+
+
+.project-info strong  {
+   font-size: 14px;
+  
+}
+
+
+.project-info small  {
+   font-size: 12px;
+  
+}
+
+
+.secondary-btn, .text-button  {
+   font-size: 13px;
+   padding: 9px 13px;
+  
+}
+
+
+.section-heading h1  {
+   font-size: 25px;
+  
+}
+
+
+.section-heading p  {
+   font-size: 16px;
+  
+}
+
+
+.monitor-grid  {
+   max-width: 765px;
+   grid-template-columns: repeat(3, minmax(0, 1fr));
+   column-gap: 32px;
+   row-gap: 100px;
+  
+}
+
+
+.monitor-card  {
+   padding: 16px;
+   border-radius: 5px;
+  
+}
+
+
+.monitor-thumb  {
+   height: 120px;
+  
+}
+
+
+.monitor-thumb .thumb-file  {
+   font-size: 44px;
+  
+}
+
+
+.monitor-line  {
+   padding: 12px 0 8px;
+  
+}
+
+
+.monitor-line strong  {
+   font-size: 17px;
+  
+}
+
+
+.status-dot  {
+   width: 23px;
+   height: 23px;
+   flex-basis: 23px;
+  
+}
+
+
+.status-caption  {
+   font-size: 12px;
+  
+}
+
+
+.monitor-actions  {
+   margin-top: 8px;
+  
+}
+
+
+.monitor-actions button, .monitor-actions a  {
+   font-size: 12px;
+  
+}
+
+
+.simple-panel  {
+   width: min(100%, 600px);
+  
+}
+
+
+.detail-preview  {
+   height: 338px;
+   margin-bottom: 14px;
+  
+}
+
+
+.observation-panel h1  {
+   font-size: 17px;
+   margin-bottom: 30px;
+  
+}
+
+
+.note-form  {
+   gap: 12px;
+  
+}
+
+
+.note-form label, .professor-note-panel label, .monitor-response label  {
+   font-size: 16px;
+  
+}
+
+
+.note-form textarea, .professor-note-panel textarea, .monitor-response textarea  {
+   font-size: 16px;
+   padding: 10px 12px;
+   min-height: 50px;
+  
+}
+
+
+.note-actions .btn, .note-actions .secondary-btn  {
+   width: min(205px, 42%);
+  
+}
+
+
+.history-block h2  {
+   font-size: 16px;
+  
+}
+
+
+.history-item  {
+   font-size: 14px;
+   padding: 10px;
+  
+}
+
+
+.history-item time  {
+   font-size: 12px;
+  
+}
+
+
+.project-layout  {
+   grid-template-columns: minmax(0, 3fr) minmax(230px, 1fr);
+   gap: 20px;
+   min-height: 0;
+  
+}
+
+
+.pdf-viewer-wrap  {
+   height: calc(100vh - 100px);
+   min-height: 420px;
+  
+}
+
+
+.professor-note-panel label  {
+   font-size: 16px;
+  
+}
+
+
+.professor-note-panel select  {
+   font-size: 15px;
+   padding: 9px;
+  
+}
+
+
+.professor-note-panel textarea  {
+   min-height: 200px;
+  
+}
+
+
+.monitor-title  {
+   font-size: 20px;
+  
+}
+
+
+.connection-label  {
+   font-size: 14px;
+  
+}
+
+
+.monitor-content  {
+   padding: 20px 4%;
+  
+}
+
+
+.monitor-pdf-viewer  {
+   height: 62vh;
+   min-height: 320px;
+   max-height: 780px;
+  
+}
+
+
+.monitor-response  {
+   gap: 18px;
+   margin: 20px 0;
+  
+}
+
+
+.teacher-feedback  {
+   padding: 15px;
+  
+}
+
+
+.teacher-feedback h2  {
+   font-size: 16px;
+  
+}
+
+
+.teacher-feedback p, .history-block p  {
+   font-size: 14px;
+   line-height: 1.45;
+  
+}
+
+
+.monitor-response form  {
+   gap: 10px;
+  
+}
+
+
+.monitor-response .btn  {
+   min-width: 140px;
+  
+}
+
+
+.toast  {
+   font-size: 14px;
+  
+}
+
+
+
+@media (max-width: 700px)  {
+  
+  .senai-header  {
+     height: 68px;
+     flex-basis: 68px;
+     padding: 0 12px;
+    
+  }
+
+
+  .senai-logo  {
+     font-size: 29px;
+    
+  }
+
+
+  .nav-header  {
+     gap: 16px;
+    
+  }
+
+
+  .navigation  {
+     gap: 12px;
+    
+  }
+
+
+  .nav-link  {
+     font-size: 14px;
+    
+  }
+
+
+  .header-user  {
+     gap: 6px;
+     font-size: 12px;
+    
+  }
+
+
+  .logout-button  {
+     font-size: 12px;
+     padding: 5px 8px;
+    
+  }
+
+
+  .senai-footer  {
+     font-size: 12px;
+     min-height: 66px;
+     flex-basis: 66px;
+    
+  }
+
+
+  .login-view .senai-header  {
+     height: 100px;
+     flex-basis: 100px;
+    
+  }
+
+
+  .login-view .senai-logo  {
+     font-size: 38px;
+    
+  }
+
+
+  .login-view .senai-footer  {
+     height: auto;
+     flex-basis: auto;
+     min-height: 82px;
+    
+  }
+
+
+  .login-form  {
+     max-width: 280px;
+    
+  }
+
+
+  .login-form h1  {
+     font-size: 22px;
+    
+  }
+
+
+  .login-form label  {
+     font-size: 15px;
+    
+  }
+
+
+  .login-form input  {
+     height: 48px;
+    
+  }
+
+
+  .app-content  {
+     padding: 20px 14px;
+    
+  }
+
+
+  .page  {
+     min-height: calc(100vh - 134px);
+    
+  }
+
+
+  .upload-panel  {
+     min-height: 285px;
+     padding: 28px 18px 22px;
+    
+  }
+
+
+  .upload-zone  {
+     height: 155px;
+    
+  }
+
+
+  .upload-zone strong  {
+     font-size: 14px;
+    
+  }
+
+
+  .upload-actions  {
+     gap: 8px;
+     margin-top: 18px;
+    
+  }
+
+
+  .upload-actions .status-text  {
+     font-size: 11px;
+    
+  }
+
+
+  .upload-actions .btn  {
+     width: 42%;
+    
+  }
+
+
+  .monitor-grid  {
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+     gap: 28px 12px;
+    
+  }
+
+
+  .monitor-card  {
+     padding: 9px;
+    
+  }
+
+
+  .monitor-thumb  {
+     height: 95px;
+    
+  }
+
+
+  .monitor-line strong  {
+     font-size: 14px;
+    
+  }
+
+
+  .status-dot  {
+     width: 17px;
+     height: 17px;
+     flex-basis: 17px;
+    
+  }
+
+
+  .monitor-actions  {
+     flex-direction: column;
+     gap: 7px;
+    
+  }
+
+
+  .monitor-actions button, .monitor-actions a  {
+     text-align: left;
+     font-size: 11px;
+    
+  }
+
+
+  .status-caption  {
+     font-size: 11px;
+    
+  }
+
+
+  .simple-panel  {
+     max-width: 600px;
+    
+  }
+
+
+  .detail-preview  {
+     height: 240px;
+    
+  }
+
+
+  .observation-panel h1  {
+     margin-bottom: 20px;
+    
+  }
+
+
+  .note-form label, .professor-note-panel label, .monitor-response label  {
+     font-size: 14px;
+    
+  }
+
+
+  .project-layout  {
+     grid-template-columns: 1fr;
+    
+  }
+
+
+  .pdf-viewer-wrap  {
+     height: 55vh;
+     min-height: 300px;
+    
+  }
+
+
+  .professor-note-panel textarea  {
+     min-height: 120px;
+    
+  }
+
+
+  .monitor-pdf-viewer  {
+     height: 55vh;
+     min-height: 280px;
+    
+  }
+
+
+  .monitor-response  {
+     grid-template-columns: 1fr;
+    
+  }
+
+
+  .monitor-header  {
+     gap: 12px;
+    
+  }
+
+
+  .monitor-title  {
+     font-size: 16px;
+    
+  }
+
+
+  .connection-label  {
+     font-size: 11px;
+    
+  }
+
+
+}
+
+
+@media (max-width: 380px)  {
+  
+  .monitor-grid  {
+     grid-template-columns: 1fr;
+    
+  }
+
+
+  .header-user #userDisplay  {
+     max-width: 58px;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+    
+  }
+
+
+  .nav-header  {
+     gap: 10px;
+    
+  }
+
+
+  .navigation  {
+     gap: 9px;
+    
+  }
+
+
+  .nav-link  {
+     font-size: 12px;
+    
+  }
+
+
+}
+
+
+
+/* Seletores finais das telas, preservando os cinco modelos do PDF. */
+#loginView .senai-header  {
+   height: 16vh;
+   flex-basis: 16vh;
+   min-height: 96px;
+  
+}
+
+
+#loginView .senai-logo  {
+   font-size: 48px;
+  
+}
+
+
+#loginView .senai-footer  {
+   height: 14.7vh;
+   flex-basis: 14.7vh;
+   min-height: 82px;
+  
+}
+
+
+#teacherApp > .senai-footer  {
+   min-height: 106px;
+   flex-basis: 106px;
+  
+}
+
+
+#teacherApp .page  {
+   min-height: 0;
+  
+}
+
+
+#teacherApp .app-content  {
+   min-height: 0;
+  
+}
+
+
+#teacherApp .monitor-grid  {
+   row-gap: 83px;
+  
+}
+
+
+#teacherApp .monitor-card  {
+   border: 0;
+   padding: 0;
+   background: transparent;
+  
+}
+
+
+#teacherApp .monitor-card-surface  {
+   border: 1px solid #dedede;
+   border-radius: 5px;
+   padding: 16px;
+   background: #fff;
+  
+}
+
+
+#teacherApp .monitor-note-link  {
+   display: block;
+   margin: 6px 0 0 3px;
+   border: 0;
+   padding: 0;
+   background: transparent;
+   color: #777;
+   text-align: left;
+   font-size: 12px;
+   cursor: pointer;
+  
+}
+
+
+#teacherApp .monitor-note-link:hover  {
+   color: var(--blue);
+   text-decoration: underline;
+  
+}
+
+
+#teacherApp .monitor-thumb  {
+   border: 0;
+  
+}
+
+
+#teacherApp .monitor-line  {
+   padding-bottom: 0;
+  
+}
+
+
+#teacherApp .status-dot  {
+   box-shadow: none;
+  
+}
+
+
+
+/* Tela do Raspberry: desenho à esquerda e observação do professor à direita. */
+#monitorView .senai-header  {
+   height: 72px;
+   flex-basis: 72px;
+   padding: 0 16px;
+   gap: 0;
+  
+}
+
+
+#monitorView .senai-logo  {
+   font-size: 42px;
+  
+}
+
+
+#monitorView .monitor-sr-title  {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   white-space: nowrap;
+  
+}
+
+
+#monitorView .connection-label  {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   white-space: nowrap;
+  
+}
+
+
+#monitorView .monitor-content  {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   width: 100%;
+   max-width: none;
+   padding: 10px 24px 20px;
+   min-height: 0;
+  
+}
+
+
+#monitorView .monitor-project-title  {
+   align-self: center;
+   min-width: 200px;
+   max-width: min(80%, 360px);
+   min-height: 32px;
+   padding: 6px 22px;
+   border-radius: 7px;
+   background: #d9d9d9;
+   color: #222;
+   font-size: 16px;
+   line-height: 20px;
+   text-align: center;
+   overflow-wrap: anywhere;
+  
+}
+
+
+#monitorView .monitor-display-layout  {
+   display: grid;
+   grid-template-columns: minmax(0, 3fr) minmax(220px, 1fr);
+   gap: 20px;
+   flex: 1;
+   min-height: 0;
+  
+}
+
+
+#monitorView .monitor-pdf-viewer  {
+   width: 100%;
+   height: auto;
+   min-height: 0;
+   max-height: none;
+   border: 0;
+   background: #f1f1f1;
+  
+}
+
+
+#monitorView .monitor-pdf-viewer iframe  {
+   width: 100%;
+   height: 100%;
+   border: 0;
+   background: #fff;
+  
+}
+
+
+#monitorView .monitor-pdf-viewer .published-project-image  {
+   max-height: none;
+  
+}
+
+
+#monitorView .monitor-teacher-note  {
+   min-width: 0;
+   border: 1px solid #111;
+   background: #fff;
+   padding: 6px;
+   display: flex;
+   flex-direction: column;
+  
+}
+
+
+#monitorView .monitor-teacher-note h1  {
+   font-size: 19px;
+   line-height: 1.3;
+   font-weight: 400;
+   margin: 0 0 8px;
+  
+}
+
+
+#monitorView .monitor-teacher-note p  {
+   font-size: 16px;
+   line-height: 1.5;
+   white-space: pre-wrap;
+   overflow-wrap: anywhere;
+   margin: 0;
+  
+}
+
+
+
+/* A tela de visualização/edição de projeto no PC também segue a proporção da página 5. */
+body.teacher-project-active #teacherApp .senai-header  {
+   height: 72px;
+   flex-basis: 72px;
+  
+}
+
+
+body.teacher-project-active #teacherApp .senai-logo  {
+   font-size: 42px;
+  
+}
+
+
+body.teacher-project-active #teacherApp .app-content  {
+   padding: 8px 3%;
+  
+}
+
+
+body.teacher-project-active #teacherApp .project-layout  {
+   height: calc(100vh - 82px);
+   min-height: 0;
+  
+}
+
+
+body.teacher-project-active #teacherApp .pdf-viewer-wrap  {
+   height: 100%;
+   min-height: 0;
+  
+}
+
+
+body.teacher-project-active #teacherApp .professor-note-panel label  {
+   font-size: 18px;
+  
+}
+
+
+body.teacher-project-active #teacherApp .professor-note-panel textarea  {
+   font-size: 16px;
+  
+}
+
+
+
+@media (max-width: 700px)  {
+  
+  #loginView .senai-header  {
+     height: 100px;
+     flex-basis: 100px;
+    
+  }
+
+
+  #loginView .senai-logo  {
+     font-size: 38px;
+    
+  }
+
+
+  #loginView .senai-footer  {
+     height: auto;
+     flex-basis: auto;
+     min-height: 82px;
+    
+  }
+
+
+  #teacherApp > .senai-footer  {
+     min-height: 66px;
+     flex-basis: 66px;
+    
+  }
+
+
+  #teacherApp .monitor-grid  {
+     row-gap: 28px;
+    
+  }
+
+
+  #teacherApp .monitor-card-surface  {
+     padding: 9px;
+    
+  }
+
+
+  #teacherApp .monitor-note-link  {
+     font-size: 11px;
+    
+  }
+
+
+  #monitorView .senai-header  {
+     height: 60px;
+     flex-basis: 60px;
+    
+  }
+
+
+  #monitorView .senai-logo  {
+     font-size: 34px;
+    
+  }
+
+
+  #monitorView .monitor-content  {
+     padding: 10px 12px 16px;
+     gap: 10px;
+    
+  }
+
+
+  #monitorView .monitor-display-layout  {
+     grid-template-columns: 1fr;
+     grid-template-rows: minmax(280px, 55vh) auto;
+     gap: 12px;
+    
+  }
+
+
+  #monitorView .monitor-teacher-note  {
+     min-height: 115px;
+    
+  }
+
+
+  #monitorView .monitor-teacher-note h1  {
+     font-size: 16px;
+    
+  }
+
+
+  #monitorView .monitor-teacher-note p  {
+     font-size: 14px;
+    
+  }
+
+
+  body.teacher-project-active #teacherApp .app-content  {
+     padding: 8px 12px;
+    
+  }
+
+
+  body.teacher-project-active #teacherApp .project-layout  {
+     height: auto;
+    
+  }
+
+
+  body.teacher-project-active #teacherApp .pdf-viewer-wrap  {
+     height: 58vh;
+     min-height: 280px;
+    
+  }
+
+
+}
+
+
+
+/* Area de envio igual ao modelo: seletor central e lixeira no canto inferior direito. */
+#teacherApp .upload-zone  {
+   position: relative;
+   padding: 0;
+   display: block;
+  
+}
+
+
+#teacherApp .upload-zone-main  {
+   position: absolute;
+   inset: 0;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 18px;
+   cursor: pointer;
+   text-align: center;
+   padding: 18px 42px;
+  
+}
+
+
+#teacherApp .clear-file  {
+   position: absolute;
+   z-index: 3;
+   right: 10px;
+   bottom: 9px;
+   width: 32px;
+   height: 32px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: 0;
+   background: transparent;
+   color: #111;
+   padding: 4px;
+  
+}
+
+
+#teacherApp .clear-file svg  {
+   width: 23px;
+   height: 23px;
+   fill: none;
+   stroke: currentColor;
+   stroke-width: 2.2;
+   stroke-linecap: round;
+   stroke-linejoin: round;
+  
+}
+
+
+#teacherApp .clear-file:hover  {
+   color: var(--red);
+  
+}
+
+
+#teacherApp .upload-actions  {
+   justify-content: center;
+  
+}
+
+
+#teacherApp .upload-actions .status-text  {
+   display: none;
+  
+}
+
+
+#teacherApp .upload-actions .btn  {
+   width: 232px;
+  
+}
+
+
+#monitorsPage .section-heading  {
+   display: none;
+  
+}
+
+
+#observationPage .history-block  {
+   display: none;
+  
+}
+
+
+@media (max-width: 700px)  {
+  
+  #teacherApp .upload-zone-main  {
+     gap: 12px;
+     padding: 12px 36px;
+    
+  }
+
+
+  #teacherApp .upload-actions .btn  {
+     width: 48%;
+    
+  }
+
+
+}
+
+
+#homePage .upload-panel  {
+   margin-top: 20px;
+  
+}
+
+
+@media (max-width: 700px)  {
+   #homePage .upload-panel  {
+     margin-top: 0;
+    
+  }
+
+
+}
+
+
+@media (max-width: 700px)  {
+   #observationPage .observation-panel  {
+     margin-top: -8px;
+    
+  }
+
+
+}
+
+
+
+
+/* Seletor de destino do desenho e indicação de projeto exclusivo por torno. */
+#teacherApp .publish-target  {
+  
+  display: flex;
+  
+  flex-direction: column;
+  
+  gap: 7px;
+  
+  margin: 18px auto 0;
+  
+  width: min(100%, 420px);
+  
+  color: #222;
+  
+}
+
+
+#teacherApp .publish-target label  {
+  
+  font-size: 15px;
+  
+  font-weight: 600;
+  
+  text-align: left;
+  
+}
+
+
+#teacherApp .publish-target select  {
+  
+  width: 100%;
+  
+  min-height: 42px;
+  
+  padding: 9px 12px;
+  
+  border: 1px solid #9e9e9e;
+  
+  border-radius: 5px;
+  
+  background: #fff;
+  
+  color: #222;
+  
+  font: inherit;
+  
+  font-size: 14px;
+  
+}
+
+
+#teacherApp .publish-target small  {
+  
+  font-size: 12px;
+  
+  line-height: 1.4;
+  
+  color: #666;
+  
+  text-align: left;
+  
+}
+
+
+#teacherApp .monitor-project-scope  {
+  
+  margin-top: 8px;
+  
+  color: #6b7280;
+  
+  font-size: 11px;
+  
+  line-height: 1.35;
+  
+}
+
+
+#teacherApp .monitor-project-scope.exclusive  {
+  
+  color: #174a2d;
+  
+  font-weight: 700;
+  
+}
+
+
+#teacherApp .monitor-reset-project  {
+  
+  display: block;
+  
+  margin: 5px 0 0 3px;
+  
+  border: 0;
+  
+  padding: 0;
+  
+  background: transparent;
+  
+  color: #20468f;
+  
+  text-align: left;
+  
+  font-size: 12px;
+  
+  cursor: pointer;
+  
+}
+
+
+#teacherApp .monitor-reset-project:hover  {
+   text-decoration: underline;
+  
+}
+
+
+#teacherApp .monitor-reset-project:disabled  {
+   opacity: .6;
+   cursor: wait;
+  
+}
+
+
+@media (max-width: 700px)  {
+  
+  #teacherApp .publish-target  {
+     margin-top: 14px;
+    
+  }
+
+
+  #teacherApp .publish-target label  {
+     font-size: 13px;
+    
+  }
+
+
+  #teacherApp .publish-target select  {
+     min-height: 44px;
+     font-size: 13px;
+    
+  }
+
+
+  #teacherApp .publish-target small  {
+     font-size: 11px;
+    
+  }
+
+
+}
+
+
+
+.monitor-open-link {
+  display:block;
+  text-align:center;
+  margin:8px 0 2px;
+  font-size:10px;
+  color:var(--blue);
+  text-decoration:underline;
+  overflow-wrap:anywhere
+}
+
+.monitor-open-link:hover {
+  color:var(--blue-dark)
+}
+
+
+
+.password-dialog {
+  width:min(92vw,390px);
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  padding:0;
+  color:var(--text);
+  box-shadow:0 18px 55px #10294a33
+}
+
+
+.password-dialog::backdrop {
+  background:#10182788
+}
+
+
+.password-dialog-form {
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  padding:22px
+}
+
+
+.password-dialog-form h2 {
+  font-size:18px;
+  margin:0 0 6px;
+  color:var(--blue)
+}
+
+
+.password-dialog-form label {
+  font-size:12px;
+  font-weight:700
+}
+
+
+.password-dialog-form input {
+  width:100%;
+  border:1px solid #b7c1d0;
+  border-radius:4px;
+  padding:10px;
+  font-size:14px
+}
+
+
+.password-dialog-actions {
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:8px
+}
+
+
+
+
+/* CONFIGURAÇÃO INICIAL: layout do formulário oculto até o servidor permitir o primeiro cadastro. */
+.setup-toggle {
+  display: block;
+  margin: 14px auto 0;
+  color: var(--blue);
+  border-color: var(--blue);
+  min-height: 36px;
+}
+.setup-form {
+  width: min(100%, 280px);
+  gap: 6px;
+}
+.setup-form h1 {
+  margin-bottom: 8px;
+}
+.setup-form .login-hint {
+  font-size: 12px;
+  margin: 0 0 12px;
+}
+.setup-form input {
+  margin-bottom: 8px;
+}
+.setup-form .secondary-btn {
+  margin-top: 8px;
+}
+
+/* LOGIN E CONFIGURAÇÃO: empilha login, botão de primeiro acesso e formulário de configuração. */
+.login-area {
+  flex-direction: column;
+}
+
+
+/* Ações do histórico de observações: botão pequeno para manter o layout original. */
+.history-item-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:5px;
+}
+.history-item-header time {
+  margin-bottom:0;
+  flex:1;
+}
+.history-item-text {
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.history-delete-btn {
+  flex:none;
+  border:1px solid #b42318;
+  border-radius:4px;
+  background:#fff;
+  color:#b42318;
+  padding:5px 10px;
+  font:inherit;
+  font-size:11px;
+  font-weight:600;
+  cursor:pointer;
+}
+.history-delete-btn:hover {
+  background:#b42318;
+  color:#fff;
+}
+.history-delete-btn:disabled {
+  opacity:.55;
+  cursor:wait;
+}
+
+.note-actions .history-delete-btn.current-note-delete {
+  width:min(205px, 42%);
+  min-height:40px;
+  padding:10px 12px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:16px;
+}
+.note-actions .history-delete-btn:disabled {
+  opacity:.45;
+  cursor:not-allowed;
+}
+@media (max-width: 560px) {
+  .note-actions { flex-wrap:wrap; }
+  .note-actions .btn, .note-actions .secondary-btn, .note-actions .history-delete-btn.current-note-delete {
+    width:100%;
+  }
+}
+
+
+/* CABEÇALHO DO ACESSO: deixa a criação da conta no topo, alternando para Entrar. */
+#loginView .login-header {
+  justify-content: space-between;
+  gap: 16px;
+}
+#loginView .login-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+#loginView .login-header-action {
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 4px;
+  padding: 9px 14px;
+  background: transparent;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+#loginView .login-header-action:hover {
+  background: rgba(255,255,255,.12);
+}
+#loginView .login-header-action:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+@media (max-width: 420px) {
+  #loginView .login-header { padding: 0 12px; }
+  #loginView .login-header-action { padding: 8px 9px; font-size: 11px; }
+  #loginView .senai-logo { font-size: 34px; }
+}
+
+.forgot-password-button { background: transparent; border: 0; color: var(--blue); text-decoration: underline; font-size: 11px; margin-top: 12px; padding: 5px; align-self: center; }
+.forgot-password-button:hover { color: var(--blue-dark); }

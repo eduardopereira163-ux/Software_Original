@@ -1,0 +1,66 @@
+CONECTORNO — SOMENTE SITE PARA O RASPBERRY QUE JÁ TEM SERVIDOR
+
+IMPORTANTE: este pacote NÃO contém app.py e NÃO instala nem cria outro servidor.
+Ele contém somente a interface web (HTML, CSS, JavaScript e recursos locais) que
+será servida pelo servidor ConecTorno que JÁ ESTÁ instalado no Raspberry principal.
+
+O PC do professor e o monitor precisam abrir o endereço do Raspberry principal.
+Assim, os dois consultam a mesma API e veem o mesmo projeto/observações.
+
+1) NO RASPBERRY PRINCIPAL
+- Pare o serviço ConecTorno que já existe.
+- Faça uma cópia da pasta static atual.
+- Copie a pasta static deste pacote para a mesma pasta onde está o app.py existente,
+  substituindo somente a pasta static antiga.
+- NÃO copie outro app.py. NÃO substitua dados.json, uploads/, auth.json,
+  monitor_tokens.json ou .secret_key.
+
+2) AJUSTE PEQUENO DA API QUE JÁ EXISTE (não é outro servidor)
+O ZIP original ConecTorno_Raspberry_LAN_2 enviado anteriormente ainda exige um
+código temporário no primeiro cadastro e exige 14 caracteres para senha. A nova
+interface pede cadastro sem código e senha a partir de 8 caracteres. Para as duas
+partes combinarem, execute o utilitário deste pacote UMA VEZ no app.py que já está
+instalado. Ele faz backup antes e altera somente as rotas de autenticação.
+
+Com este pacote copiado para o Raspberry, execute no terminal:
+  python3 AJUSTAR_API_EXISTENTE.py /CAMINHO/DA/PASTA/CONECTORNO/app.py
+
+Exemplo (ajuste se sua instalação estiver em outro local):
+  python3 AJUSTAR_API_EXISTENTE.py /home/pi/ConecTorno/app.py
+
+O utilitário não inicia servidor. Ele cria um backup ao lado do app.py e só grava
+as mudanças depois de verificar a sintaxe.
+
+3) PRIMEIRO CADASTRO
+- Se já existe auth.json com uma conta antiga, o botão de criar não aparecerá porque
+o sistema entende que já existe professor cadastrado.
+- Para criar uma conta nova, primeiro faça uma cópia de segurança do auth.json e
+  renomeie SOMENTE esse arquivo (por exemplo, auth_antigo.json). Não apague dados.json,
+  uploads/, monitor_tokens.json nem .secret_key.
+- O primeiro cadastro é liberado porque ainda não existe conta. Depois de cadastrar,
+  a tela passa a mostrar somente o login. A senha é gravada no Raspberry como hash.
+- A senha aceita no mínimo 8 caracteres e não tem limite de 14 (limite técnico 256).
+
+4) INICIE O SERVIÇO QUE JÁ EXISTIA
+Use o mesmo serviço/forma de inicialização que já está configurado no Raspberry.
+Se ele foi instalado com o instalador padrão deste projeto, use:
+  sudo systemctl restart conectorno
+  sudo systemctl status conectorno --no-pager
+
+5) ABRIR NO PC E NO MONITOR
+- Conecte o PC do professor e o dispositivo do monitor ao Wi-Fi local do Raspberry.
+- No PC do professor, abra o endereço local do Raspberry, por exemplo:
+  http://192.168.50.1:5000
+- Entre ou crie o primeiro usuário. Depois use os links privados de monitor gerados
+  pelo painel para abrir cada monitor. O link contém o ID e o token próprio do monitor.
+- Não abra index.html por duplo clique nem pelo Live Server do VS Code para o uso real:
+  o navegador precisa abrir a página na mesma origem do servidor Raspberry para falar
+  com a API e compartilhar os projetos.
+
+6) O QUE ESTE PACOTE FAZ / NÃO FAZ
+- Faz: interface do professor, upload para a API existente, seleção dos monitores,
+  observações, exclusão de observações, visualização dos monitores e login/cadastro.
+- Não faz: não cria rede Wi-Fi, não cria servidor, não inicia serviço, não substitui
+  a API. O serviço/API já instalado no Raspberry continua sendo necessário.
+- A rede local, o IP e o serviço precisam estar corretamente configurados no Raspberry.
+  O pacote não consegue verificar o hardware/rede do SENAI a partir deste PC.

@@ -1,0 +1,57 @@
+{
+  "project": {
+    "name": "peca_tecnica.pdf",
+    "url": "/uploads/dbb7388bd3cbc814.pdf",
+    "type": "application/pdf"
+  },
+  "monitors": {
+    "1": {
+      "project": null,
+      "teacher_note": "",
+      "teacher_history": [],
+      "access_token": "t_zyiJVSy0FyoB6-9swCtOn43nFp1ciD",
+      "last_seen": 1793378718.7321932,
+      "has_project_override": false
+    },
+    "2": {
+      "project": null,
+      "teacher_note": "",
+      "teacher_history": [],
+      "access_token": "EHQ4r64CvSYSyyPIzpdW_4gpfPlLxq3T",
+      "last_seen": 0,
+      "has_project_override": false
+    },
+    "3": {
+      "project": null,
+      "teacher_note": "",
+      "teacher_history": [],
+      "access_token": "yJwwdxxTbnWX7WtB9dR37ezNTTKyX74h",
+      "last_seen": 0,
+      "has_project_override": false
+    },
+    "4": {
+      "project": null,
+      "teacher_note": "",
+      "teacher_history": [],
+      "access_token": "ZT60BsUGHk3oIqBqghezHOQofzfnkR4n",
+      "last_seen": 0,
+      "has_project_override": false
+    },
+    "5": {
+      "project": null,
+      "teacher_note": "",
+      "teacher_history": [],
+      "access_token": "297lhe4lXRqJzwzngYZY1uxl79NXNY1I",
+      "last_seen": 0,
+      "has_project_override": false
+    },
+    "6": {
+      "project": null,
+      "teacher_note": "",
+      "teacher_history": [],
+      "access_token": "qvJbjyIcPLelwAtyqjwTBdpTIO0JIROn",
+      "last_seen": 0,
+      "has_project_override": false
+    }
+  }
+}

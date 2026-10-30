@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+<!-- Página principal do ConecTorno. O HTML define as cinco telas e os formulários; app.js controla as ações. -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#20468f">
+  <title>ConecTorno - SENAI</title>
+  <link rel="stylesheet" href="/style.css?v=20261026-note-delete">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Janela autenticada para o professor trocar a senha sem editar arquivos manualmente. -->
+  <dialog id="passwordChangeDialog" class="password-dialog" aria-labelledby="passwordDialogTitle">
+    <form id="passwordChangeForm" class="password-dialog-form">
+      <h2 id="passwordDialogTitle">Alterar senha</h2>
+      <label for="currentPasswordInput">Senha atual</label>
+      <input id="currentPasswordInput" type="password" autocomplete="current-password" required>
+      <label for="newPasswordInput">Nova senha (mínimo 8 caracteres)</label>
+      <input id="newPasswordInput" type="password" autocomplete="new-password" minlength="8" maxlength="256" required>
+      <label for="confirmPasswordInput">Confirme a nova senha</label>
+      <input id="confirmPasswordInput" type="password" autocomplete="new-password" minlength="8" maxlength="256" required>
+      <div class="password-dialog-actions">
+        <button id="cancelPasswordChange" class="secondary-btn" type="button">Cancelar</button>
+        <button class="btn" type="submit">Salvar senha</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Tela de login do professor. A senha é verificada pelo servidor, nunca por este HTML. -->
+  <section id="loginView" class="view view-login">
+    <header class="senai-header login-header">
+      <div class="senai-logo">SENAI</div>
+      <div class="login-header-actions">
+        <button id="toggleSetupButton" class="login-header-action" type="button" hidden>Criar usuário e senha</button>
+        <button id="backToLoginButton" class="login-header-action" type="button" hidden>← Voltar para Entrar</button>
+      </div>
+    </header>
+    <main class="login-area">
+      <form id="loginForm" class="login-form">
+        <h1>Faça seu Login</h1>
+        <label for="username">Digite seu usuário:</label>
+        <input id="username" name="username" autocomplete="username" maxlength="64" required>
+        <label for="password">Digite sua senha:</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required>
+        <button class="btn" type="submit">Concluir</button>
+        <button id="forgotPasswordButton" class="forgot-password-button" type="button">Esqueci a senha</button>
+      </form>
+
+      <form id="recoveryForm" class="login-form" hidden>
+        <h1>Recuperar senha</h1>
+        <label for="recoveryUsername">Usuário do professor:</label><input id="recoveryUsername" autocomplete="username" required maxlength="64">
+        <label for="recoveryCode">Código de recuperação:</label><input id="recoveryCode" autocomplete="off" required maxlength="100">
+        <label for="recoveryNewPassword">Nova senha (mínimo 12 caracteres):</label><input id="recoveryNewPassword" type="password" autocomplete="new-password" minlength="12" maxlength="256" required>
+        <label for="recoveryConfirmPassword">Confirme a nova senha:</label><input id="recoveryConfirmPassword" type="password" autocomplete="new-password" minlength="12" maxlength="256" required>
+        <button class="btn" type="submit">Redefinir senha</button>
+        <button id="cancelRecoveryButton" class="forgot-password-button" type="button">Voltar para Entrar</button>
+      </form>
+
+      <!-- O primeiro cadastro aparece somente enquanto ainda não existe conta no servidor. -->
+      <form id="setupForm" class="login-form setup-form" hidden>
+        <h1>Criar usuário e senha</h1>
+        <label for="setupUsernameInput">Usuário do professor:</label>
+        <input id="setupUsernameInput" autocomplete="username" minlength="3" maxlength="64" required>
+        <label for="setupPasswordInput">Crie sua senha (mínimo 8 caracteres):</label>
+        <input id="setupPasswordInput" type="password" autocomplete="new-password" minlength="8" maxlength="256" required>
+        <label for="setupConfirmationInput">Confirme sua senha:</label>
+        <input id="setupConfirmationInput" type="password" autocomplete="new-password" minlength="8" maxlength="256" required>
+        <button class="btn" type="submit">Criar e entrar</button>
+      </form>
+    </main>
+    <footer class="senai-footer">Desenvolvido pela turma de Desenvolvimento de Sistemas - Vespertino</footer>
+  </section>
+
+  <!-- Painel privado do professor: publicação geral ou por torno, estado, observações e configuração. -->
+  <section id="teacherApp" class="view" hidden>
+    <header class="senai-header nav-header">
+      <div class="senai-logo">SENAI</div>
+      <nav class="navigation" aria-label="Navegação principal">
+        <button class="nav-link active" data-page="home">Início</button>
+        <button class="nav-link" data-page="monitors">Monitores</button>
+      </nav>
+      <div class="header-user"><span id="userDisplay"></span><button id="changePasswordButton" class="logout-button" type="button">Alterar senha</button><button id="logoutButton" class="logout-button" type="button">Sair</button></div>
+    </header>
+
+    <main class="app-content">
+      <section id="homePage" class="page">
+        <div class="upload-panel">
+          <form id="uploadForm">
+            <div class="upload-zone">
+              <label class="upload-zone-main" for="pdfFile">
+                <span class="upload-icon" aria-hidden="true">⇧</span>
+                <strong>Adicione sua imagem em PDF:</strong>
+                <span id="selectedFileName" class="selected-file">Clique para selecionar um PDF ou imagem</span>
+              </label>
+              <button id="clearSelectedFile" class="clear-file" type="button" aria-label="Limpar arquivo selecionado" title="Limpar arquivo selecionado">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m-9 0 1 13h10l1-13M10 10v7m4-7v7"/></svg>
+              </button>
+            </div>
+            <input id="pdfFile" class="visually-hidden" type="file" accept="application/pdf,.pdf,image/png,image/jpeg,image/webp,image/gif,image/bmp" required>
+            <div class="publish-target">
+              <label for="publishTarget">Enviar o projeto para:</label>
+              <select id="publishTarget" name="destino">
+                <option value="todos">Todos os monitores (1 a 6)</option>
+                <option value="1">Somente Monitor1</option>
+                <option value="2">Somente Monitor2</option>
+                <option value="3">Somente Monitor3</option>
+                <option value="4">Somente Monitor4</option>
+                <option value="5">Somente Monitor5</option>
+                <option value="6">Somente Monitor6</option>
+              </select>
+              <small>Escolher um monitor não altera os desenhos dos outros.</small>
+            </div>
+            <div class="upload-actions">
+              <span id="uploadStatus" class="status-text">Nenhum PDF publicado.</span>
+              <button class="btn" type="submit">Concluir</button>
+            </div>
+          </form>
+          <div id="publishedProject" class="published-project" hidden>
+            <span id="projectBadge" class="pdf-badge">PDF</span>
+            <div class="project-info"><strong id="publishedName">Projeto publicado</strong><small id="publishedMeta"></small></div>
+            <button id="previewProjectButton" class="secondary-btn" type="button">Visualizar</button>
+            <button id="deleteProjectButton" class="text-button" type="button">Remover</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="monitorsPage" class="page" hidden>
+        <div class="section-heading"><h1>Monitores</h1><p>Escolha um monitor para enviar observações ou abrir a tela do aluno.</p></div>
+        <div id="monitorGrid" class="monitor-grid"></div>
+      </section>
+
+      <section id="observationPage" class="page" hidden>
+        <div class="simple-panel observation-panel">
+          <div class="detail-preview" id="observationPreview"><div class="empty-preview"><span>PDF</span><p>Projeto publicado</p></div></div>
+          <h1 id="observationTitle">Monitor1</h1>
+          <form id="teacherNoteForm" class="note-form">
+            <label for="teacherNoteInput">Digite suas observações:</label>
+            <textarea id="teacherNoteInput" rows="3" maxlength="3000" placeholder="Escreva a observação para o aluno..." required></textarea>
+            <div class="note-actions"><button class="secondary-btn" id="backToMonitors" type="button">Voltar</button><button class="history-delete-btn current-note-delete" id="deleteCurrentNoteButton" type="button" disabled>Apagar</button><button class="btn" type="submit">Enviar</button></div>
+          </form>
+          <div class="history-block"><h2>Observações já enviadas</h2><div id="teacherHistory" class="history-list"></div></div>
+        </div>
+      </section>
+
+      <section id="projectPage" class="page" hidden>
+        <div class="project-layout">
+          <div class="pdf-viewer-wrap" id="teacherPdfViewer"><div class="empty-preview"><span>PDF</span><p>Nenhum projeto publicado</p></div></div>
+          <aside class="professor-note-panel">
+            <label for="projectMonitorSelect">Monitor:</label>
+            <select id="projectMonitorSelect">
+              <option value="1">Monitor1</option><option value="2">Monitor2</option><option value="3">Monitor3</option>
+              <option value="4">Monitor4</option><option value="5">Monitor5</option><option value="6">Monitor6</option>
+            </select>
+            <label for="projectTeacherNote">Observação do Professor :</label>
+            <textarea id="projectTeacherNote" rows="12" maxlength="3000" placeholder="Digite a observação para este monitor..."></textarea>
+            <button class="btn" id="saveProjectNote" type="button">Salvar observação</button>
+            <button class="secondary-btn" id="backFromProject" type="button">Voltar</button>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <footer class="senai-footer">Desenvolvido pela turma de Desenvolvimento de Sistemas - Vespertino</footer>
+  </section>
+
+  <!-- Tela pública do torno: dados de um único monitor são carregados pela API com seu token privado. -->
+  <section id="monitorView" class="view monitor-view" hidden>
+    <header class="senai-header nav-header monitor-public-header">
+      <div class="senai-logo">SENAI</div>
+      <span class="monitor-sr-title" id="monitorHeading">Monitor1</span>
+      <span id="monitorConnection" class="connection-label" aria-live="polite">Conectando...</span>
+    </header>
+    <main class="monitor-content">
+      <div id="monitorProjectName" class="monitor-project-title">Aguardando projeto do professor</div>
+      <div class="monitor-display-layout">
+        <div id="monitorPdfViewer" class="monitor-pdf-viewer">
+          <div class="empty-preview"><span>PDF</span><p>Aguardando o professor publicar um projeto</p></div>
+        </div>
+        <aside class="monitor-teacher-note">
+          <h1>Observação do Professor :</h1>
+          <p id="teacherFeedbackText">Nenhuma observação enviada.</p>
+        </aside>
+      </div>
+    </main>
+  </section>
+
+  <!-- defer faz o navegador carregar a lógica depois de analisar o HTML. -->
+  <script src="/app.js?v=20261029-first-access" defer></script>
+</body>
+</html>

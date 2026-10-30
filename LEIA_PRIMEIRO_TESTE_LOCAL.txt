@@ -1,0 +1,15 @@
+CONECTORNO — TESTE EM CASA NO WINDOWS
+
+Este pacote acrescenta um servidor Flask de teste local à interface enviada. Ele permite testar login/cadastro, envio de PDF/imagem, seleção dos seis monitores e observações, inclusive apagar observações. Os dados ficam em dados_teste.json, auth_teste.json e uploads/ nesta pasta.
+
+1. Instale Python 3.10 ou superior pelo site python.org. Durante a instalação marque “Add Python to PATH”.
+2. Extraia TODO o ZIP para uma pasta.
+3. Dê dois cliques em INSTALAR_E_TESTAR_NO_WINDOWS.bat.
+4. Depois dê dois cliques em INICIAR_CONECTORNO.bat.
+5. Abra http://127.0.0.1:5000 no navegador. No primeiro acesso, crie usuário e senha (mínimo 8 caracteres).
+6. Para testar com celular/outro PC na mesma rede doméstica, conecte ambos ao mesmo Wi-Fi e abra http://IP-DO-PC:5000. O Firewall do Windows pode pedir autorização para redes privadas.
+
+IMPORTANTE: este app.py é um servidor de TESTE EM CASA, separado da API oficial que já está no Raspberry. Não substitua o app.py do Raspberry por este arquivo. Ele usa dados_teste.json/auth_teste.json para não misturar os dados oficiais. Para testar o monitor no navegador, abra o link privado de cada monitor no painel.
+
+Para parar: CTRL+C na janela preta.
+Para zerar o teste: feche o servidor e apague dados_teste.json e auth_teste.json (isso apaga os dados/conta de teste); os arquivos enviados ficam na pasta uploads/.
